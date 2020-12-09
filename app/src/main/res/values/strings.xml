@@ -5,4 +5,5 @@
     <string name="error_permission">Não é possível obter sua localização sem autorização</string>
     <string name="latitude_label">Latitude:</string>
     <string name="longitude_label">Longitude:</string>
+    <string name="coordinate_label">Coordenadas</string>
 </resources>
