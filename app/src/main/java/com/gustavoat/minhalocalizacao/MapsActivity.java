@@ -22,6 +22,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Locale;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -89,12 +91,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void startPositionService(){
         try {
             LocationManager locationmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            LocationListener locationlistener = new LocationListener() {
-                @Override
-                public void onLocationChanged(@NonNull Location location) {
-                     refreshPosition(location);
-                }
-            };
+            LocationListener locationlistener = this::refreshPosition;
             locationmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     0, 0, locationlistener);
         } catch (SecurityException e) {
@@ -113,7 +110,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             myPosition.setPosition(newPosition);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(newPosition));
         }
-        String latitude = String.format("%1$s %2$.4f\n%3$s %4$.4f",
+        String latitude = String.format(new Locale("pt", "BR"),
+                "%1$s %2$.4f\n%3$s %4$.4f",
                 getText(R.string.latitude_label),
                 newPosition.latitude,
                 getText(R.string.longitude_label),
