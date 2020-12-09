@@ -34,8 +34,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        txtLatLon = findViewById(R.id.textViewLatitude);
-        txtLatLon.setText(R.string.latitude_label);
+        txtLatLon = findViewById(R.id.textViewLatLon);
+        txtLatLon.setText(R.string.coordinate_label);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -67,6 +67,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     ACCESS_FINE_LOCATION_REQUEST);
+        }else {
+            startPositionService();
         }
     }
 
